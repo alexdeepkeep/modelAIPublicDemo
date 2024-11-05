@@ -1,0 +1,28 @@
+name: postprocessing
+requirements:
+  - torch==2.3.0
+  - torchvision==0.18.0
+
+input:
+  - name: bounding_boxes
+    type: torch.Tensor
+    description: bounding box predictions
+    shape: [-1, 10647, 1, 4]  
+    format: ['batch size', 'number of predictions', '_', 'xyxy']
+    required: true
+  - name: confidences
+    type: torch.Tensor
+    description: confidences
+    shape: [-1, 10647, 80]  
+    format: ['batch size', 'number of predictions', 'number of classes']
+    required: true
+
+output:
+  - name: predictions
+    type: torch.Tensor
+    description: list of bounding boxes, confidences and lables
+    shape: [-1, 6]  
+    format: ['batch size', 'results']
+    required: true
+  
+
